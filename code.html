@@ -58,17 +58,92 @@
             <div class="col-lg-8">
                 <pre class="Line-numbers">
                     <code class="language-javascript">
-                        //Call HelloWorld
-                        function HelloWorld(){
-                          alert("hello World");
-                            }
+                        
+//get values from interface
+//stars or controller function
+function getValues(){
+    // get values from the app page 
+    let startValue = document.getElementById("startValue").value;
+    let endValue = document.getElementById("endValue").value;
+    
+
+    //validation of input for the integers
+    //parse into integers
+    startValue =parseInt(startValue);
+    endValue = parseInt(endValue);
+    
+
+    if (Number.isInteger(startValue)  && Number.isInteger(endValue)) {
+        
+        //we call generateNumbers
+      let numbers = generateNumbers(startValue,endValue);
+
+    //we call displayNumbers
+     displayNumbers(numbers);
+
+    }else{
+        alert("Please enter only numbers into the value boxes.")
+    }
+
+
+   
+}
+
+//generate numbers from start value to end value 
+//logic function(s)
+function generateNumbers(sValue,eValue){
+    let numbers = [];
+//get all numbers from start to end 
+for (let index = sValue; index <= eValue; index++) {
+   numbers.push(index);
+    
+}
+
+
+return numbers;
+}
+
+//display the numbers and bold the even ones 
+//display or view functions 
+function displayNumbers(numbers){
+
+    let templateRows = "";
+
+    for (let index = 0; index < numbers.length; index++) {
+
+    let className = "even";    
+    let number = numbers[index];
+
+    if(number % 2 == 0){
+        className = "even";
+    }else{
+        className = "odd"
+    }
+    // this does not render correctly with prisim source
+    templateRows += `<tr><td class="${className}">${number}</td></tr>`;
+}
+
+document.getElementById("results").innerHTML = templateRows;
+
+}
                     </code>
                 </pre>       
             </div>
             <div class="col-lg-4">
-               <p>The Code is structured in one function.</p>
-               <h4>Hello World</h4>
-               <p>Hello world is a function that displays an alert with a message of "hello World"</p>
+               <p>The Code is structured in three functions.</p>
+               <h4>getValues - Function</h4>
+               <p>This function allows us to grab the start and end values from the user on the app page using grab element by ID.
+                The function also checks to validate that integers are being entered.
+               </p>
+
+               <h4>generateNumbers - Function</h4>
+               <p>This function takes the start and end values then using a for loop it iterates from start to end generating each number
+                and storing it into an array. </p>
+
+               <h4>displayNumbers - Function</h4>
+               <p>The display numbers uses a for loop to iterate through the array of generated numbers to add table rows to the resutls table 
+                in the app page. the table row has been added to a if fucntion which checsk if the number is even. if it is even then the class is 
+                 set to even and then it will check the css to BOLD the number on the results table.</p>
             </div>
         </div>
     </div>
